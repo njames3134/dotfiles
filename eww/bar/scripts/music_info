@@ -1,0 +1,110 @@
+#!/bin/bash
+
+## Get data
+STATUS="$(playerctl status -p spotify)"
+COVER="/tmp/.music_cover.png"
+MUSIC_DIR="$HOME/Music"
+
+## Get status
+get_status() {
+	if [[ $STATUS == "Playing" ]]; then
+		echo ""
+	else
+		echo "奈"
+	fi
+}
+
+## Get song
+get_song() {
+  playerctl -F metadata --format '{{ title }}' -p spotify
+  # while read -r _ ; do
+  #   title=$(playerctl metadata --format '{{ title }}' -p spotify)
+  #   count=$(echo -n "$title" | wc -c)
+  #   if [ -z "$title" ]; then
+  #     echo "Nothing Playing... \\n";
+  #   else
+  #     if [ "$count" -le 18 ]; then
+  #       echo "$title \\n"
+  #     else 
+  #       echo $(playerctl -F metadata --format '{{ title }}' -p spotify | awk '{print $1, $2}')...
+  #     fi
+  #   fi
+  # done
+  #  song=$(playerctl -F metadata -f '{{ xesam:title }}' -p spotify)
+	# if [[ -z "$song" ]]; then
+	# 	echo "Offline"
+	# else
+	# 	echo "$song"
+	# fi	
+}
+
+## Get artist
+get_artist() {
+  playerctl -F metadata -f '{{ xesam:artist }}' -p spotify
+	# if [[ -z "$artist" ]]; then
+	# 	echo ""
+	# else
+	# 	echo "$artist"
+	# fi	
+}
+
+## Get time
+get_time() {
+  time=$(((($(get_ctime) / $(get_ttime))) * 100))
+	if [[ -z "$time" ]]; then
+	 	echo "0"
+	else
+	  echo "$time"
+	fi	
+}
+get_ctime() {
+  ctime=$(playerctl position -p spotify)
+	if [[ -z "$ctime" ]]; then
+		echo "0:00"
+	else
+		echo "$ctime"
+	fi	
+}
+get_ttime() {
+	ttime=$(playerctl metadata -f '{{ mpris:length/1000000 }}' -p spotify)
+	if [[ -z "$ttime" ]]; then
+		echo "0:00"
+	else
+		echo "$ttime"
+	fi	
+}
+
+## Get cover
+get_cover() {
+  curl -s "$(playerctl metadata -f '{{ mpris:artUrl }}' -p spotify)" > /tmp/.music_cover.png
+	STATUS=$?
+	# Check if the file has a embbeded album art
+	if [ "$STATUS" -eq 0 ];then
+		echo "$COVER"
+	else
+		echo "images/music.png"
+	fi
+}
+
+## Execute accordingly
+if [[ "$1" == "--song" ]]; then
+	get_song
+elif [[ "$1" == "--artist" ]]; then
+	get_artist
+elif [[ "$1" == "--status" ]]; then
+	get_status
+elif [[ "$1" == "--time" ]]; then
+	get_time
+elif [[ "$1" == "--ctime" ]]; then
+	get_ctime
+elif [[ "$1" == "--ttime" ]]; then
+	get_ttime
+elif [[ "$1" == "--cover" ]]; then
+	get_cover
+elif [[ "$1" == "--toggle" ]]; then
+	playerctl play-pause -p spotify
+elif [[ "$1" == "--next" ]]; then
+	{ playerctl next -p spotify ; get_cover; }
+elif [[ "$1" == "--prev" ]]; then
+	{ playerctl previous -p spotify; get_cover; }
+fi

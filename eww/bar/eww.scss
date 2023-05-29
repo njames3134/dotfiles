@@ -1,0 +1,225 @@
+/** EWW.SCSS
+Created by njames3134 **/
+*{
+	all: unset;
+	font-family: feather;
+	font-family: JetBrainsMono;
+}
+
+/****************
+  GENERAL 
+****************/
+
+// workspace bar
+.bar_works {
+  font-size: 32px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #1e2030;
+  border-radius: 16px;
+  border: 2px solid #b4befe;
+}
+
+// general bar
+.bar_general {
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #1e2030;
+  border-radius: 16px;
+  border: 2px solid #b4befe;
+}
+
+// general module
+.module {
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px 16px 0px 10px;
+}
+
+/****************
+  TOOLTIP
+****************/
+
+tooltip.background {
+    background-color: #0f0f17;
+    font-size: 18;
+    border-radius: 10px;
+    color: #bfc9db;
+}
+
+tooltip label {
+    margin: 6px;
+}
+
+/****************
+  WIDGETS
+****************/
+
+/* WORKSPACE */
+.0 , .01, .02, .03, .04, .05, .06,
+.011, .022, .033, .044, .055, .066{
+  margin: 0px 7px 0px 7px;
+}
+/* Unoccupied */
+.0 {
+color: #3e424f;
+}
+/* Occupied */
+.01, .02, .03, .04, .05, .06 {
+  color: #bfc9db;
+}
+/* Focused */
+.011, .022, .033, .044, .055, .066 {
+  color: #a1bdce;
+}
+
+/* CLOCK */
+.clock_time_sep {
+    font-size: 16;
+    color: #bfc9db;
+    margin: 0px 4px 1px 4px;
+}
+.clock_time_class, .clock_minute_class {
+    font-size: 23;
+}
+.clock_date_class {
+    font-size: 18;
+    margin: 0px 0px 0px 10px;
+    color: #d7beda;
+}
+.clock_minute_class {
+    margin: 0px 0px 0px 3px;
+    color: #bfc9db;
+}
+.clock_time_class {
+    color: #bfc9db;
+    font-weight: bold;
+    margin: 0px 5px 0px 0px;
+}
+
+/* MEMORY */
+.mem_module {
+  background-color: #0f0f17;
+	border-radius: 16px;
+  margin: 0px 10px 0px 3px;
+}
+.membar {
+  color: #e0b089;
+  background-color: #38384d;
+  border-radius: 10px;
+}
+.iconmem {
+  color: #e0b089;
+  font-size: 15;
+  margin: 10px;
+}
+
+/* BLUETOOTH */ 
+.bt_icon {
+  color: #a1bdce;
+  font-size: 36;
+  margin: -10px 5px -10px 5px;
+}
+
+/* MICROPHONE */ 
+.mic_icon {
+  color: #a1bdce;
+  font-size: 36;
+  margin: -10px 5px -10px 5px;
+}
+
+/* BATTERY */
+.bat_module {
+  background-color: #1e2030;
+	border-radius: 16px;
+  margin: 0px 5px 0px 5px;
+}
+.batbar {
+  color: #afbea2;
+  background-color: #1e2030;
+  border-radius: 10px;
+}
+.iconbat {
+  color: #afbea2;
+  font-size: 15;
+  margin: 10px;
+}
+
+/* BRIGHTNESS */
+.bright_icon {
+  font-size: 22;
+  color: #e4c9af;
+  margin: 0px 5px 0px 5px;
+}
+
+/* VOLUME */
+.volume_icon {
+  font-size: 22;
+  color: #a1bdce;
+  margin: 0px 5px 0px 5px;
+}
+
+/* WIFI */
+.module_essid {
+  font-size: 18;
+  color: #a1bdce;
+  margin: 0px 5px 0px 5px;
+}
+.module-wif {
+  font-size: 32;
+  color: #a1bdce;
+  border-radius: 100%;
+  margin: -5px 5px -5px 5px;
+}
+
+/* SYSTEM */
+.iconsystem {
+  color: #e0b089;
+  font-size: 30;
+  margin: 0px 10px 0px 10px;
+}
+
+/* SEPARATOR */
+.separ {
+  color: #3e424f;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 0px 8px 0px 8px;
+}
+
+/* MUSIC */
+scale trough {
+  all: unset;
+  background-color: #22242b;
+  box-shadow: 0 2px 3px 2px #06060b;
+  border-radius: 16px;
+  min-height: 10px;
+  min-width: 70px;
+  margin: 0px 10px 0px 0px;
+}
+.song_cover_art {
+  background-color: #22242b;
+	background-size: cover;	
+	background-position: center;
+	min-height: 24px;
+	min-width: 24px;
+	margin: 0px 10px 0px 5px;
+	border-radius: 8px;
+}
+.song {
+	color: #a1bdce;
+	font-size : 18px;
+	font-weight : bold;
+	margin : 3px 5px 0px 0px;
+}
+.song_btn_play {
+	font-family: Iosevka Nerd Font;
+	color: #a1bdce;
+	font-size : 28px;
+	margin : 3px 0px 0px 5px;
+}
+.song_btn_prev, .song_btn_next {
+	color: #bfc9db;
+	font-size : 24px;
+	margin : 3px 0px 0px 5px;
+}
+

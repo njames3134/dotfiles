@@ -1,0 +1,252 @@
+;; Include global variables
+(include "../globals.yuck")
+
+(defvar eww "/usr/bin/eww -c $HOME/.config/eww/bar")
+
+;; **Widgets****************************************************
+
+;; wifi
+(defwidget wifi [] 
+  (eventbox 
+    :onhover "${eww} update wifi_rev=true"
+		:onhoverlost "${eww} update wifi_rev=false"
+		(box 
+      :vexpand "false" 
+      :hexpand "false" 
+      :space-evenly "false"
+		  (button :class "module-wif" 
+        :tooltip "${ESSID_WLAN}" 
+        :onclick "~/scripts/launch_nmtui" 
+        :wrap "false" 
+        :limit-width 12 
+        :style "color: ${COL_WLAN};" 
+        WLAN_ICON
+      )
+		)
+  )
+)
+
+;; workspaces
+(defwidget workspaces []
+  (literal 
+    :content workspace
+  )
+)
+
+;; battery
+(defwidget bat []
+  (box :class "bat_module" 
+    :vexpand "false" 
+    :hexpand "false" 
+    (circular-progress :class "batbar"
+      :value battery
+      :thickness 4
+      (button :class "iconbat"
+        :limit-width 2
+        :tooltip "battery on ${battery}%"
+        :show_truncated false
+        :onclick "$HOME/.config/eww/widgets/scripts/pop system"
+        :wrap false
+      )
+    )
+  )
+)
+
+;; memory
+(defwidget mem []
+  (box :class "mem_module" 
+    :vexpand "false" 
+    :hexpand "false" 
+    (circular-progress :class "membar"
+      :value memory
+      :thickness 4
+      (button 
+        :class "iconmem"
+        :limit-width 2
+        :tooltip "using ${memory}% ram"
+        :onclick "$HOME/.config/eww/widgets/scripts/pop system"
+        :show_truncated false
+        :wrap false
+        ""
+      )
+    )
+  )
+)
+
+;; separator
+(defwidget sep []
+  (box :class "module-2" 
+    :vexpand "false" 
+    :hexpand "false"
+    (label :class "separ" 
+      :text "|"
+    )
+  )
+)
+
+;; clock
+(defwidget clock_module []
+  (box :class "module" 
+    :space-evenly "false" 
+    :orientation "h" 
+    :spacing "3" 
+    :hexpand "true" 
+    :halign "center" 
+    (button :class "clock_time_class" 
+      :onclick "$HOME/.config/eww/widgets/scripts/pop calendar" 
+      clock_time
+    )
+    (button :class "clock_time_sep" 
+      :onclick "$HOME/.config/eww/widgets/scripts/pop calendar" 
+      ""
+    )
+    (button :class "clock_minute_class" 
+      :onclick "$HOME/.config/eww/widgets/scripts/pop calendar" 
+      clock_minute
+    )
+  )
+)
+ 
+;; volume
+(defwidget volume []
+  (box :class "module" 
+    :space-evenly "false" 
+    :valign "center" 
+    :orientation "v" 
+    :spacing "3" 
+	  (button :class "volume_icon"  
+      :onclick "~/scripts/launch_pulsemixer"
+      ""
+    )
+  )
+)
+
+;; brightness
+(defwidget bright []
+  (box :class "module" 
+    :space-evenly "false" 
+    :orientation "h" 
+    :spacing "3" 
+    (label :class "bright_icon" 
+      :text "" 
+      :tooltip "brightness"
+    )
+  )
+)
+
+;; music 
+(defwidget music [] 
+  (eventbox 
+    :onhover "${eww} update music_reveal=true"
+	  :onhoverlost "${eww} update music_reveal=false"
+		(box :class "bar_general" 
+      :halign "center" 
+      :orientation "h" 
+      :space-evenly "false" 
+      :vexpand "false" 
+      :hexpand "true" 
+			(box :class "song_cover_art" 
+        :valign "center" 
+        :halign "center" 
+        :vexpand "false" 
+        :hexpand "false" 
+        :style "background-image: url('${cover_art}');"
+      )
+			(button :class "song" 
+        :wrap "true" 
+        :onclick "~/.config/eww/widgets/scripts/pop music" 
+        song
+      )
+	    (revealer 
+        :transition "slideright"
+			  :reveal music_reveal
+			  :duration "350ms"
+        (box 
+          :vexpand "false" 
+          :hexpand "false" 
+          :oreintation "h" 
+          (button :class "song_btn_prev" 
+            :onclick "~/.config/eww/bar/scripts/music_info --prev" 
+            ""
+          )
+          (button :class "song_btn_play" 
+            :onclick "~/.config/eww/bar/scripts/music_info --toggle" 
+            song_status
+          )
+          (button :class "song_btn_next" 
+            :onclick "~/.config/eww/bar/scripts/music_info --next" 
+            ""
+          )
+        )
+      )
+    )
+  )
+)
+
+(defwidget dashboard []
+  (box :class "bar_general" 
+    :halign "cener" 
+    :orientation "h" 
+    :space-evenly "false"
+    (button :class "iconsystem"
+      :limit-width 10
+      :show_truncated false
+      :onclick "~/.config/eww/widgets/scripts/pop system"
+      :wrap false
+      "󰍺"
+    )
+  )
+)
+
+(defwidget bluetooth []
+  (box :class "module"
+    :space-evenly "false" 
+    :orientation "h" 
+    :spacing "3" 
+    (button :class "bt_icon"
+      :limit-width 10
+      :show_truncated false
+      :onclick "~/scripts/launch_bluetoothctl"
+      "󰂯"
+    )
+  )
+)
+
+(defwidget microphone []
+  (box :class "module"
+    :space-evenly "false" 
+    :orientation "h" 
+    :spacing "3" 
+    (button :class "mic_icon"
+      :limit-width 10
+      :show_truncated false
+      :onclick "~/scripts/launch_pulsemixer"
+      "󰍬"
+    )
+  )
+)
+
+
+(defwidget stats []
+	(box :class "bar_general"
+    :orientation "h" 
+    :space-evenly false  
+    :halign "end"
+    (bright)
+    (volume)
+    (wifi)
+    (bluetooth)
+    (microphone)
+    (bat)
+  )
+)
+
+(defwidget clock []
+  (box :class "bar_general"
+    :oreintation "h"
+    :space-evenly false
+    :halign "center"
+    (clock_module)
+  )
+)
+
