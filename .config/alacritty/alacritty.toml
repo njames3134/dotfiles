@@ -1,0 +1,10 @@
+import = ["/home/nick/.config/alacritty/catpuccin/catpuccin-mocha.toml"]
+
+[env]
+TERM = "alacritty"
+
+[selection]
+save_to_clipboard = true
+
+[font]
+normal = { family = "FiraCode Nerd Font Mono", style = "Regular" }

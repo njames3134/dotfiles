@@ -1,0 +1,13 @@
+#!/bin/sh
+
+fpath+=($HOME/.config/zsh/plugins/pure)
+
+autoload -U promptinit; promptinit
+
+# options
+PURE_CMD_MAX_EXEC_TIME=3
+zstyle :prompt:pure:user color defualt
+zstyle :prompt:pure:host color default
+zstyle ':prompt:pure:prompt:success' color green
+
+prompt pure
